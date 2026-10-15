@@ -15,8 +15,8 @@ url="https://github.com/gnustep/libobjc2"
 license=('spdx:MIT')
 depends=("${MINGW_PACKAGE_PREFIX}-cc-libs")
 makedepends=("${MINGW_PACKAGE_PREFIX}-cmake"
-             "${MINGW_PACKAGE_PREFIX}-clang22"
-             "${MINGW_PACKAGE_PREFIX}-lld22"
+             "${MINGW_PACKAGE_PREFIX}-clang"
+             "${MINGW_PACKAGE_PREFIX}-lld"
              "${MINGW_PACKAGE_PREFIX}-robin-map"
              'git')
 
@@ -39,8 +39,6 @@ build() {
   else
     extra_config+=("-DCMAKE_BUILD_TYPE=Debug")
   fi
-
-  export PATH="${MINGW_PREFIX}/opt/llvm22/bin:${PATH}"
 
   case ${MSYSTEM} in
     MINGW*|UCRT*)
