@@ -18,6 +18,7 @@ makedepends=("${MINGW_PACKAGE_PREFIX}-autotools"
 _commit=cafd2c4a73b568b2f0022f15a149963f39c564f3
 source=("git+https://github.com/gnustep/${_gitname}#commit=${_commit}")
 sha256sums=('SKIP')
+options=('!strip')
 
 pkgver() {
   cd "${srcdir}/${_gitname}"
@@ -30,7 +31,8 @@ build() {
 
   export CC="clang"
   export CXX="clang++"
-  export CFLAGS="$CFLAGS -DSTRICT_APPLE_COMPATIBILITY=1"
+  export CFLAGS="$CFLAGS -g -DSTRICT_APPLE_COMPATIBILITY=1"
+  export CXXFLAGS="$CXXFLAGS -g"
 
   # libobjc2 defers exception handling to the C++ library, so link with a C++ library
   case ${MSYSTEM} in

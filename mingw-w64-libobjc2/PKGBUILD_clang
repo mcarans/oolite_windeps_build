@@ -23,6 +23,7 @@ makedepends=("${MINGW_PACKAGE_PREFIX}-cmake"
 _commit=fab3df291a37fefdcc7b774c507ffb2ad5db6fb8
 source=("git+https://github.com/gnustep/${_realname}#commit=${_commit}")
 sha256sums=('SKIP')
+options=('!strip')
 
 pkgver() {
   cd "${srcdir}/${_realname}"
@@ -35,7 +36,7 @@ build() {
 
   declare -a extra_config
   if check_option "debug" "n"; then
-    extra_config+=("-DCMAKE_BUILD_TYPE=Release")
+    extra_config+=("-DCMAKE_BUILD_TYPE=RelWithDebInfo")
   else
     extra_config+=("-DCMAKE_BUILD_TYPE=Debug")
   fi
