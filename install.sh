@@ -68,7 +68,7 @@ mkdir packages
 
 pacman -Syu --noconfirm
 pacman -S --noconfirm dos2unix git jq pactoys unzip
-pacboy -S --noconfirm binutils curl espeak-ng libpng libvorbis mesa meson ninja nsis ntldd openal pcaudiolib python-pip sdl3
+pacboy -S --noconfirm binutils curl espeak-ng gdb libpng libvorbis mesa meson ninja nsis ntldd openal pcaudiolib python-pip sdl3
 
 echo "Building common libraries"
 PACKAGE_NAMES=(spidermonkey)
@@ -161,7 +161,7 @@ else
     echo "❌ Oolite test failed" >&2
     cd build/meson_debug/oolite.app
     ntldd -R oolite.exe
-    gdb -ex "run" -ex "bt" -ex "quit" --args oolite.exe
+    gdb -ex "run" -ex "bt" -ex "quit" --args ./oolite.exe
     exit 1
 fi
 
