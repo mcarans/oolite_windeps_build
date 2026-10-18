@@ -10,15 +10,6 @@ permissions:
 jobs:
   build-and-release:
     runs-on: windows-2025
-    strategy:
-      fail-fast: true  # If Clang fails, GCC stops too
-      matrix:
-        compiler: [clang, gcc]
-        include:
-          - compiler: clang
-            env_msystem: UCRT64
-          - compiler: gcc
-            env_msystem: MINGW64
 
     steps:
     - uses: actions/checkout@v6
@@ -31,13 +22,13 @@ jobs:
     - name: Build Oolite
       shell: msys2 {0}
       env:
-        msystem: ${{ matrix.env_msystem }}
+        msystem: UCRT64
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         echo 'header = "Authorization: Bearer '$GITHUB_TOKEN'"' >> ~/.curlrc
         echo 'header = "Accept: application/vnd.github+json"' >> ~/.curlrc
         cp ~/.curlrc /c/Users/runneradmin/.curlrc 2>/dev/null || true
-        ./install.sh ${{ matrix.compiler }}
+        ./install.sh clang
 
     - name: Upload to GitHub Release
       uses: softprops/action-gh-release@v2
