@@ -35,7 +35,6 @@ makedepends=("${MINGW_PACKAGE_PREFIX}-autotools"
 _commit=7c81d0c833b5455da889fe3980db0aa415cf550f
 source=("git+https://github.com/gnustep/${_gitname}#commit=${_commit}")
 sha256sums=('SKIP')
-options=('!strip')
 
 pkgver() {
   cd "${srcdir}/${_gitname}"

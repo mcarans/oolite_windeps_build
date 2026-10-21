@@ -68,7 +68,7 @@ mkdir packages
 
 pacman -Syu --noconfirm
 pacman -S --noconfirm dos2unix git jq pactoys unzip
-pacboy -S --noconfirm binutils curl espeak-ng gdb libpng libvorbis mesa meson ninja nsis ntldd openal pcaudiolib python-pip sdl3
+pacboy -S --noconfirm binutils clang lld curl espeak-ng gdb libpng libvorbis mesa meson ninja nsis ntldd openal pcaudiolib python-pip sdl3
 
 echo "Building common libraries"
 PACKAGE_NAMES=(spidermonkey)
@@ -85,7 +85,6 @@ if [[ -z "$1" || "$1" == "clang" ]]; then
     done
     pacman -Q > packages/installed-packages-clang.txt
     NATIVE_FILE="clang.ini"
-    pacboy -S --noconfirm clang lld
 else
     echo "Building GNUStep libraries with gcc"
     GCC_PACKAGE_NAMES=(gnustep-make gnustep-base)
