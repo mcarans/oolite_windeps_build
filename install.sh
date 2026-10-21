@@ -146,19 +146,19 @@ rm -rf oolite
 git clone --filter=blob:none https://github.com/OoliteProject/oolite.git
 cd oolite
 
-./mk.sh clean debug
-if ./mk.sh build debug --native-file="$NATIVE_FILE"; then
+./mk.sh clean dev
+if ./mk.sh build dev --native-file="$NATIVE_FILE"; then
     echo "✅ Oolite build completed successfully"
 else
     echo "❌ Oolite build failed" >&2
     exit 1
 fi
 
-if ./mk.sh test debug; then
+if ./mk.sh test dev; then
     echo "✅ Oolite test completed successfully"
 else
     echo "❌ Oolite test failed" >&2
-    cd build/meson_debug/oolite.app
+    cd build/meson_dev/oolite.app
     ntldd -R oolite.exe
     gdb -ex "run" -ex "bt" -ex "quit" --args ./oolite.exe
     exit 1
